@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
 function Timer({ rounds, roundDuration }) {
-    const [time, setTime] = useState(5);
-    const counter = useRef(null);
+    const [time, setTime] = useState(roundDuration);
+    const counter = useRef(0);
     const workSeconds = useRef(0);
+
+    useEffect(() => {
+        setTime(roundDuration);
+    }, [roundDuration]);
 
     // const [minutes, setMinutes] = useState();
     // const [seconds, setseconds] = useState();
@@ -56,9 +60,16 @@ function Timer({ rounds, roundDuration }) {
     );
 }
 
-function Settings() {
-    function onSubmit() {
-        console.log("clicked");
+function Settings({ updateRounds, updateDuration }) {
+    function onSubmit(event) {
+        event.preventDefault();
+        const newRounds = event.target.rounds.value;
+        updateRounds(newRounds);
+
+        const newDuration = event.target.duration.value;
+        updateDuration(newDuration);
+
+        console.log("NEW", newRounds, newDuration);
     }
 
     return (
@@ -67,11 +78,17 @@ function Settings() {
             <form className="settings-form" onSubmit={onSubmit}>
                 <div>
                     <label for="duration">Length of Round(in minutes): </label>
-                    <input type="number" id="duration"></input>
+                    <input type="number" id="duration" min="1" max="59"></input>
                 </div>
                 <div>
                     <label for="rounds">Number of rounds: </label>
-                    <input type="number" id="rounds"></input>
+                    <input
+                        type="number"
+                        id="rounds"
+                        name="rounds"
+                        min="1"
+                    ></input>
+                    {/* <button onClick={updateRounds}>Update Rounds</button> */}
                 </div>
                 <button type="submit">Submit</button>
             </form>

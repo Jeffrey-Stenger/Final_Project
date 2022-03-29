@@ -8,7 +8,7 @@ import Stats from "./Stats";
 const logo = "doctor_logo.png";
 
 function App() {
-    const [rounds, setRounds] = useState(6);
+    const [rounds, setRounds] = useState(5);
     const [roundDuration, setRoundDuration] = useState(25);
 
     useEffect(() => {
@@ -19,13 +19,15 @@ function App() {
             });
     }, []);
 
-    // parentRoundUpdater(numberOfRounds) {
-    //     setRounds(numberOfRounds);
-    // }
+    function parentRoundUpdater(numberOfRounds) {
+        console.log("PARENT ROUNDS", numberOfRounds);
+        setRounds(numberOfRounds);
+    }
 
-    // parentUpdateDuration(newDuration) {
-    //     setRoundDuration(newDuration);
-    // }
+    function parentUpdateDuration(newDuration) {
+        console.log("parent duration", newDuration);
+        setRoundDuration(newDuration);
+    }
 
     return (
         <BrowserRouter>
@@ -39,10 +41,10 @@ function App() {
                 </div>
             </header>
             <section className="main-page">
-                <Timer />
+                <Timer rounds={rounds} roundDuration={roundDuration} />
                 <Settings
-                // updateRounds={parentRoundUpdater}
-                // updateDuration={parentUpdateDuration}
+                    updateRounds={parentRoundUpdater}
+                    updateDuration={parentUpdateDuration}
                 />
             </section>
         </BrowserRouter>

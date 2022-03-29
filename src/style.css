@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #202142;
+    color: rgb(209, 20, 178);
+    line-height: 1.6;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+/* ********* NAVBAR ********* */
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgb(209, 20, 178);
+}
+
+.nav-bar h1 {
+    margin-left: 1rem;
+}
+
+.link-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.nav-link {
+    margin: 1rem;
+    color: #ffb49a;
+}
+
+/* ********* Main Page ********* */
+.main-page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ********* TIMER ********* */
+.timer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-container {
+    border: 2px solid rgb(209, 20, 178);
+    width: 30rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.time-window {
+    font-size: 40px;
+}
+
+.minutes {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.timer-button-wrapper {
+    margin: 1rem;
+}
+
+.timer-button-wrapper button {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 1rem;
+    width: 6rem;
+    border-radius: 5px;
+}
+
+.timer-button-wrapper button:hover {
+    color: #fff;
+    background-color: #55828b;
+    border-color: #333;
+}
+
+.timer-button-wrapper button:focus,
+.timer-button-wrapper button:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.timer-button-wrapper button:active {
+    background-color: #55828b;
+    box-shadow: 0 3px #666;
+    transform: translateY(3px);
+}
+
+.settings-wrapper {
+    border: 2px solid rgb(209, 20, 178);
+    width: 30rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 15px;
+}

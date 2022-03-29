@@ -1,9 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { BrowserRouter, NavLink, Route } from "react-router-dom";
+import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
 
 import { Timer, Settings } from "./Timer";
 import Stats from "./Stats";
+import UpdateActivity from "./Activity";
+import Instructions from "./Instructions";
+import SelectActivity from "./SelectActivity";
 
 const logo = "doctor_logo.png";
 
@@ -31,22 +34,35 @@ function App() {
 
     return (
         <BrowserRouter>
-            <header className="nav-bar">
-                <img src={logo} className="logo" />
-                <h1>Dr Deep Work</h1>
-                <div className="link-wrapper">
-                    <NavLink className="nav-link" to="/Stats">
-                        My Statistics
-                    </NavLink>
-                </div>
-            </header>
-            <section className="main-page">
-                <Timer rounds={rounds} roundDuration={roundDuration} />
-                <Settings
-                    updateRounds={parentRoundUpdater}
-                    updateDuration={parentUpdateDuration}
-                />
-            </section>
+            <Switch>
+                <Route exact path="/">
+                    <header className="nav-bar">
+                        <div className="left">
+                            <img src={logo} className="logo" />
+                        </div>
+                        <h1>Dr Deep Work</h1>
+                        <div className="link-wrapper right">
+                            <NavLink className="nav-link" to="/Stats">
+                                My Statistics
+                            </NavLink>
+                            <NavLink className="nav-link" to="/Instructions">
+                                Instructions
+                            </NavLink>
+                        </div>
+                    </header>
+                    <section className="main-page">
+                        <Timer rounds={rounds} roundDuration={roundDuration} />
+                        <Settings
+                            updateRounds={parentRoundUpdater}
+                            updateDuration={parentUpdateDuration}
+                        />
+                        <SelectActivity />
+                    </section>
+                </Route>
+                <Route path="/Instructions">
+                    <Instructions />
+                </Route>
+            </Switch>
         </BrowserRouter>
     );
 }

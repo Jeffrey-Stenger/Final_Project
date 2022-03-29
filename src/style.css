@@ -15,14 +15,25 @@ code {
 
 .nav-bar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid rgb(209, 20, 178);
 }
+.left,
+.right {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.logo {
+    height: 4rem;
+    width: 4rem;
+}
 
 .nav-bar h1 {
-    margin-left: 1rem;
+    font-size: 30px;
 }
 
 .link-wrapper {
@@ -100,6 +111,7 @@ code {
     transform: translateY(3px);
 }
 
+/* ********* SETTINGS COMPONENT ********* */
 .settings-wrapper {
     border: 2px solid rgb(209, 20, 178);
     width: 30rem;
@@ -108,4 +120,78 @@ code {
     flex-direction: column;
     text-align: center;
     border-radius: 15px;
+    margin: 2rem;
+}
+
+.settings-wrapper button {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 1rem;
+    width: 6rem;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.settings-wrapper button:hover {
+    color: #fff;
+    background-color: #55828b;
+    border-color: #333;
+}
+
+.settings-wrapper button:focus,
+.settings-wrapper button:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.settings-wrapper button:active {
+    background-color: #55828b;
+    box-shadow: 0 3px #666;
+    transform: translateY(3px);
+}
+
+/* ********* ACTIVITY COMPONENT ********* */
+.select-activity-container {
+    /* border: 2px solid rgb(209, 20, 178); */
+    width: 30rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    /* border-radius: 15px; */
+    margin-top: 2rem;
+}
+/* 
+.activity-container textarea {
+    height: 3rem;
+    width: 20rem;
+} */
+
+.select-activity-container button {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 1rem;
+    width: 8rem;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.select-activity-container button:hover {
+    color: #fff;
+    background-color: #55828b;
+    border-color: #333;
+}
+
+.select-activity-container button:focus,
+.select-activity-container button:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.select-activity-container button:active {
+    background-color: #55828b;
+    box-shadow: 0 3px #666;
+    transform: translateY(3px);
 }

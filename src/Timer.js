@@ -2,39 +2,43 @@ import { useState, useEffect, useRef } from "react";
 
 function Timer({ rounds, roundDuration }) {
     const [time, setTime] = useState(roundDuration);
-    const counter = useRef(0);
-    const workSeconds = useRef(0);
+    const counter = useRef();
+    // const workSeconds = useRef(0);
+
+    const workCount = 0;
 
     useEffect(() => {
-        setTime(roundDuration);
+        setTime(roundDuration * 60);
     }, [roundDuration]);
 
-    // const [minutes, setMinutes] = useState();
-    // const [seconds, setseconds] = useState();
+    function formatTime(time) {
+        return (time - (time %= 60)) / 60 + (9 < time ? ":" : ":0") + time;
+    }
 
-    // const seconds = minutes % 60;
+    const displayTime = formatTime(time);
 
     function stopIncrement() {
         window.clearInterval(counter.current);
     }
 
-    useEffect(() => {
-        workSeconds.current = workSeconds.current + 1;
-        const totalWorkedSeconds = workSeconds.current;
-        return totalWorkedSeconds;
-    });
+    // useEffect(() => {
+    //     workSeconds.current = workSeconds.current + 1;
+    //     const totalWorkedSeconds = workSeconds.current;
+    //     return totalWorkedSeconds;
+    // });
 
     if (time === 0) {
         stopIncrement();
     }
 
-    function startCountdown() {
+    function startCountdown(workCount) {
         console.log("Time", time);
         if (time > 0) {
             counter.current = window.setInterval(() => {
                 setTime((time) => time - 1);
+                workCount++;
+                console.log("counter.current:", { counter });
             }, 1000);
-            return;
         }
     }
 
@@ -42,19 +46,22 @@ function Timer({ rounds, roundDuration }) {
         stopIncrement();
     }
 
+    function stopSession() {
+        setTime(0);
+    }
+
     return (
         <section className="timer-wrapper">
             <div className="timer-container">
                 <div className="time-window">
                     Time Remaining:
-                    <div className="minutes">{time}</div>
+                    <div className="minutes">{displayTime}</div>
                 </div>
-                <div>{workSeconds.current} seconds worked</div>
             </div>
             <div className="timer-button-wrapper">
                 <button onClick={startCountdown}>Start</button>
                 <button onClick={pauseCountdown}>Pause</button>
-                <button>Stop</button>
+                <button onClick={stopSession}>Cancel All</button>
             </div>
         </section>
     );

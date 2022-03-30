@@ -17,7 +17,7 @@ code {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid rgb(209, 20, 178);
 }
@@ -34,6 +34,7 @@ code {
 
 .nav-bar h1 {
     font-size: 30px;
+    position: sticky;
 }
 
 .link-wrapper {
@@ -51,7 +52,9 @@ code {
 .main-page {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -64,7 +67,8 @@ code {
 
 .timer-container {
     border: 2px solid rgb(209, 20, 178);
-    width: 30rem;
+    width: 50rem;
+    height: 25rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -78,7 +82,7 @@ code {
 
 .minutes {
     font-weight: bold;
-    font-size: 50px;
+    font-size: 80px;
 }
 
 .timer-button-wrapper {
@@ -120,7 +124,12 @@ code {
     flex-direction: column;
     text-align: center;
     border-radius: 15px;
-    margin: 2rem;
+    margin: 1rem;
+    max-height: 400px;
+}
+
+.settings-wrapper h1 {
+    margin: auto;
 }
 
 .settings-wrapper button {
@@ -129,7 +138,7 @@ code {
     margin-right: 1rem;
     width: 6rem;
     border-radius: 5px;
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     margin-bottom: 0.5rem;
 }
 
@@ -151,22 +160,21 @@ code {
     transform: translateY(3px);
 }
 
-/* ********* ACTIVITY COMPONENT ********* */
+/* ********* SELECT ACTIVITY DIV ********* */
 .select-activity-container {
-    /* border: 2px solid rgb(209, 20, 178); */
     width: 30rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     text-align: center;
-    /* border-radius: 15px; */
-    margin-top: 2rem;
+    margin-top: 0rem;
 }
-/* 
-.activity-container textarea {
-    height: 3rem;
-    width: 20rem;
-} */
+
+.select-activity-container h2 {
+    font-size: 20px;
+    margin-bottom: 0;
+}
 
 .select-activity-container button {
     font-weight: bold;
@@ -175,7 +183,7 @@ code {
     width: 8rem;
     border-radius: 5px;
     margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
 }
 
 .select-activity-container button:hover {

@@ -2,17 +2,19 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
 
-import { Timer, Settings } from "./Timer";
+import { Timer } from "./Timer";
+import { Settings } from "./Settings";
 import Stats from "./Stats";
-import UpdateActivity from "./Activity";
 import Instructions from "./Instructions";
-import SelectActivity from "./SelectActivity";
+import Modal from "./Modal";
+// import SelectActivity from "./SelectActivity";
 
 const logo = "doctor_logo.png";
 
 function App() {
     const [rounds, setRounds] = useState(5);
-    const [roundDuration, setRoundDuration] = useState(25);
+    const [roundDuration, setRoundDuration] = useState(0.1);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         fetch("/api/me")
@@ -32,35 +34,59 @@ function App() {
         setRoundDuration(newDuration);
     }
 
+    function displayModal() {
+        console.log("Parent modal reached");
+        setShowModal(true);
+    }
+
+    function hideModal() {
+        console.log("Parent hide modal reached");
+        setShowModal(false);
+    }
+
     return (
         <BrowserRouter>
+            <header className="nav-bar">
+                <div className="left">
+                    <NavLink to="/">
+                        <img src={logo} className="logo" alt="" />
+                    </NavLink>
+                </div>
+                <h1>Dr Deep Work</h1>
+                <div className="link-wrapper right">
+                    <NavLink className="nav-link" to="/Stats">
+                        My Statistics
+                    </NavLink>
+                    <NavLink className="nav-link" to="/Instructions">
+                        Instructions
+                    </NavLink>
+                </div>
+            </header>
+            <Route exact path="/">
+                <section className="main-page">
+                    {showModal && <Modal hideModal={hideModal} />}
+                    <Settings
+                        updateRounds={parentRoundUpdater}
+                        updateDuration={parentUpdateDuration}
+                    />
+                    <Timer
+                        rounds={rounds}
+                        roundDuration={roundDuration}
+                        displayModal={() => {
+                            console.log("toggle modal in timer triggered");
+                            displayModal();
+                        }}
+                    />
+
+                    {/* <SelectActivity /> */}
+                </section>
+            </Route>
             <Switch>
-                <Route exact path="/">
-                    <header className="nav-bar">
-                        <div className="left">
-                            <img src={logo} className="logo" />
-                        </div>
-                        <h1>Dr Deep Work</h1>
-                        <div className="link-wrapper right">
-                            <NavLink className="nav-link" to="/Stats">
-                                My Statistics
-                            </NavLink>
-                            <NavLink className="nav-link" to="/Instructions">
-                                Instructions
-                            </NavLink>
-                        </div>
-                    </header>
-                    <section className="main-page">
-                        <Timer rounds={rounds} roundDuration={roundDuration} />
-                        <Settings
-                            updateRounds={parentRoundUpdater}
-                            updateDuration={parentUpdateDuration}
-                        />
-                        <SelectActivity />
-                    </section>
-                </Route>
                 <Route path="/Instructions">
                     <Instructions />
+                </Route>
+                <Route path="/Stats">
+                    <Stats />
                 </Route>
             </Switch>
         </BrowserRouter>

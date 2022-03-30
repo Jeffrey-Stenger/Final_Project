@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+// import { useEffect, useState } from "react";
 import { Component } from "react";
 
 export default class UpdateActivity extends Component {
@@ -30,7 +29,7 @@ export default class UpdateActivity extends Component {
         // call the function passed as a prop
         this.props.updateActivity(udpatedActivity);
 
-        fetch("/api/users/activity", {
+        fetch("/api/me/activity", {
             method: "POST",
             body: JSON.stringify({ activity: udpatedActivity }),
             headers: {

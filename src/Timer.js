@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-function Timer({ rounds, roundDuration }) {
+function Timer({ rounds, roundDuration, displayModal }) {
     const [time, setTime] = useState(roundDuration);
+    // const [timeOverEvent, setTimeOverEvent] = useState(false);
     const counter = useRef();
     // const workSeconds = useRef(0);
 
@@ -28,8 +29,20 @@ function Timer({ rounds, roundDuration }) {
     // });
 
     if (time === 0) {
-        stopIncrement();
+        useEffect(() => {
+            if (time === 0) {
+                stopIncrement();
+                displayModal();
+            }
+        }, []);
     }
+
+    useEffect(() => {
+        if (time === 0) {
+            stopIncrement();
+            displayModal();
+        }
+    }, []);
 
     function startCountdown(workCount) {
         console.log("Time", time);
@@ -67,40 +80,4 @@ function Timer({ rounds, roundDuration }) {
     );
 }
 
-function Settings({ updateRounds, updateDuration }) {
-    function onSubmit(event) {
-        event.preventDefault();
-        const newRounds = event.target.rounds.value;
-        updateRounds(newRounds);
-
-        const newDuration = event.target.duration.value;
-        updateDuration(newDuration);
-
-        console.log("NEW", newRounds, newDuration);
-    }
-
-    return (
-        <div className="settings-wrapper">
-            <h1>SETTINGS</h1>
-            <form className="settings-form" onSubmit={onSubmit}>
-                <div>
-                    <label for="duration">Length of Round(in minutes): </label>
-                    <input type="number" id="duration" min="1" max="59"></input>
-                </div>
-                <div>
-                    <label for="rounds">Number of rounds: </label>
-                    <input
-                        type="number"
-                        id="rounds"
-                        name="rounds"
-                        min="1"
-                    ></input>
-                    {/* <button onClick={updateRounds}>Update Rounds</button> */}
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    );
-}
-
-export { Timer, Settings };
+export { Timer };

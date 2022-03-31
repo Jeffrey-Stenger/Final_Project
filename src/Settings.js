@@ -97,6 +97,33 @@ function Settings({ updateDuration, updateActivity }) {
                         />
                         <label for="reading">Reading</label>
                     </div>
+                    <div className="radio-option-wrapper">
+                        <input
+                            type="radio"
+                            id="exercising"
+                            name="activity"
+                            value="exercising"
+                        />
+                        <label for="exercising">Exercising</label>
+                    </div>
+                    <div className="radio-option-wrapper">
+                        <input
+                            type="radio"
+                            id="team-meeting"
+                            name="activity"
+                            value="team meeting"
+                        />
+                        <label for="team-meeting">Team Meeting</label>
+                    </div>
+                    <div className="radio-option-wrapper">
+                        <input
+                            type="radio"
+                            id="responding-to-emails"
+                            name="activity"
+                            value="responding to emails"
+                        />
+                        <label for="team-meeting">Responding to emails</label>
+                    </div>
                     <button type="submit">Submit</button>
                     {submissionSuccess && <p>submitted!</p>}
                 </div>

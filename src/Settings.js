@@ -43,7 +43,7 @@ function Settings({ updateDuration, updateActivity }) {
                     <input
                         type="number"
                         id="duration"
-                        min="0.1"
+                        min="1"
                         max="120"
                     ></input>
                 </div>

@@ -10,7 +10,7 @@ const server = Server(app);
 
 const PORT = 3000;
 
-const { insertActivity, createWorkSession } = require("./db");
+const { insertActivity, createWorkSession, getUserStats } = require("./db");
 
 //*********** MIDDLEWARES ***********/
 app.use(compression());
@@ -48,16 +48,26 @@ app.post("/api/me/worksession", (request, response) => {
 
     createWorkSession({ work_time, activity })
         .then((user) => {
-            console.log("USER!:", user);
-            // if (!user) {
-            //     response.status(404).json({
-            //         error: "Could not save data",
-            //     });
-            //     return;
-            // }
             response.json(user);
         })
         .catch((error) => {
             response.status(400).json({ error: error });
+        });
+});
+
+app.get("/api/me/mystats/:startDate/:endDate", (request, response) => {
+    const start_date = request.params.startDate;
+    const end_date = request.params.endDate;
+    console.log("express start_date", start_date);
+
+    getUserStats({ start_date, end_date })
+        .then((results) => {
+            response.json(results);
+        })
+        .catch((error) => {
+            console.log("stats error", error);
+            response.status(404).json({
+                error: "Could not retrieve statistics for the selected dates.",
+            });
         });
 });

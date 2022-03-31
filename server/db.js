@@ -20,17 +20,19 @@ function createWorkSession({ work_time, activity }) {
             [work_time, activity]
         )
         .then(({ rows }) => {
-            console.log("New work session created:", rows[0]);
             return rows[0];
         });
 }
 
-function getUserById(id) {
+function getUserStats({ start_date, end_date }) {
     return db
-        .query("SELECT * FROM work_sessions WHERE id = $1", [id])
+        .query(
+            "SELECT * FROM work_sessions WHERE DATE(created_at) BETWEEN $1 AND $2",
+            [start_date, end_date]
+        )
         .then(({ rows }) => {
-            console.log("USER BEGOTTEN", rows[0]);
-            return rows[0];
+            console.log("user stats", rows);
+            return rows;
         });
 }
 
@@ -43,7 +45,6 @@ function insertActivity({ activity, user_id }) {
             [activity, user_id]
         )
         .then(({ rows }) => {
-            console.log("Activity updated", rows[0]);
             return rows[0];
         });
 }
@@ -52,6 +53,8 @@ function insertActivity({ activity, user_id }) {
 
 // getUserById(1);
 // insertActivity({ activity: "calculating", user_id: 102 });
-createWorkSession({ work_time: 29, activity: "calculating" });
+// createWorkSession({ work_time: 29, activity: "calculating" });
 
-module.exports = { insertActivity, createWorkSession };
+// getUserStats({ start_date: "2022-03-05", end_date: "2022-04-20" });
+
+module.exports = { insertActivity, createWorkSession, getUserStats };

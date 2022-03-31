@@ -39,8 +39,9 @@ function App() {
         setShowModal(true);
     }
 
-    function hideModal() {
+    function hideModal(newDuration) {
         console.log("Parent hide modal reached");
+        setRoundDuration(5);
         setShowModal(false);
     }
 

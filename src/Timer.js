@@ -29,28 +29,26 @@ function Timer({ rounds, roundDuration, displayModal }) {
     // });
 
     if (time === 0) {
-        useEffect(() => {
-            if (time === 0) {
-                stopIncrement();
-                displayModal();
-            }
-        }, []);
+        stopIncrement();
+        displayModal();
     }
-
-    useEffect(() => {
-        if (time === 0) {
-            stopIncrement();
-            displayModal();
-        }
-    }, []);
+    // const useCallback
+    // useEffect(() => {
+    //     if (time === 0) {
+    //         stopIncrement();
+    //         displayModal();
+    //     }
+    // }, []);
 
     function startCountdown(workCount) {
         console.log("Time", time);
         if (time > 0) {
             counter.current = window.setInterval(() => {
                 setTime((time) => time - 1);
-                workCount++;
+
+                console.log("workcount", workCount);
                 console.log("counter.current:", { counter });
+                return workCount++;
             }, 1000);
         }
     }
@@ -69,6 +67,7 @@ function Timer({ rounds, roundDuration, displayModal }) {
                 <div className="time-window">
                     Time Remaining:
                     <div className="minutes">{displayTime}</div>
+                    <div>work seconds: {workCount}</div>
                 </div>
             </div>
             <div className="timer-button-wrapper">

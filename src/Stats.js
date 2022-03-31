@@ -3,7 +3,7 @@ import Plot from "react-plotly.js";
 import { useState, useEffect } from "react";
 
 export default function Stats() {
-    let stats;
+    const [stats, setStats] = useState();
 
     function onSubmit(event) {
         event.preventDefault();
@@ -15,45 +15,48 @@ export default function Stats() {
             .then((data) => {
                 console.log("data retrieved", data);
 
-                const workLengths = data.map((item) => {
-                    return item.work_time;
-                });
+                // const workLengths = data.map((item) => {
+                //     return item.work_time;
+                // });
 
-                const activities = data.map((item) => {
-                    return item.activity;
-                });
-                console.log("workLengths", workLengths);
-                console.log("activities", activities);
-                stats = [
+                // const activities = data.map((item) => {
+                //     return item.activity;
+                // });
+                // console.log("workLengths", workLengths);
+                // console.log("activities", activities);
+                setStats([
                     {
-                        values: workLengths,
-                        labels: activities,
+                        values: data.map((each) => each.work_time),
+                        labels: data.map((each) => each.activity),
                         type: "pie",
                     },
-                ];
-
-                return stats;
+                ]);
             });
-        return stats;
     }
 
-    const showStats = stats;
+    console.log("stats", stats);
 
     return (
         <div className="stats-wrapper">
             <Plot
                 data={stats}
                 layout={{
-                    width: 500,
-                    height: 500,
-                    title: "My Time Breakdown",
+                    width: 600,
+                    height: 600,
+                    title: "My Work Session Breakdown",
+                    paper_bgcolor: "#202142",
+                    font: {
+                        family: "Tacoma",
+                        size: 24,
+                        color: "white",
+                        weight: "bold",
+                    },
                 }}
             />
-            <p>{console.log(showStats)}</p>
             <div className="stats-date-form">
                 <form onSubmit={onSubmit}>
                     <h3>
-                        Select date range to view your work session breakdown
+                        Select date range to view your work session statistics
                     </h3>
                     <label for="start">Start date:</label>
                     <input type="date" id="start" name="start" />

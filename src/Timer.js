@@ -57,8 +57,8 @@ function Timer({ rounds, roundDuration, displayModal }) {
         stopIncrement();
     }
 
-    function stopSession() {
-        setTime(0);
+    function resetSession() {
+        setTime(roundDuration * 60);
     }
 
     return (
@@ -67,13 +67,17 @@ function Timer({ rounds, roundDuration, displayModal }) {
                 <div className="time-window">
                     Time Remaining:
                     <div className="minutes">{displayTime}</div>
-                    <div>work seconds: {workCount}</div>
                 </div>
-            </div>
-            <div className="timer-button-wrapper">
-                <button onClick={startCountdown}>Start</button>
-                <button onClick={pauseCountdown}>Pause</button>
-                <button onClick={stopSession}>Cancel All</button>
+                <div className="timer-button-wrapper">
+                    <button onClick={startCountdown}>Start</button>
+                    <button onClick={pauseCountdown}>Pause</button>
+                    <button
+                        onClick={resetSession}
+                        className="reset-timer-button"
+                    >
+                        Reset Timer
+                    </button>
+                </div>
             </div>
         </section>
     );

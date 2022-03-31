@@ -10,7 +10,7 @@ const server = Server(app);
 
 const PORT = 3000;
 
-const { insertActivity } = require("./db");
+const { insertActivity, createWorkSession } = require("./db");
 
 //*********** MIDDLEWARES ***********/
 app.use(compression());
@@ -41,19 +41,20 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening on port ", PORT);
 });
 
-app.post("/api/me/activity", (request, response) => {
-    const { user_id } = request.session;
-    const { activity } = request.body;
+app.post("/api/me/worksession", (request, response) => {
+    // const { user_id } = request.session;
+    const { work_time, activity } = request.body;
+    console.log("request body from post", work_time);
 
-    insertActivity({ activity, user_id })
+    createWorkSession({ work_time, activity })
         .then((user) => {
             console.log("USER!:", user);
-            if (!user) {
-                response.status(404).json({
-                    error: "User not found",
-                });
-                return;
-            }
+            // if (!user) {
+            //     response.status(404).json({
+            //         error: "Could not save data",
+            //     });
+            //     return;
+            // }
             response.json(user);
         })
         .catch((error) => {

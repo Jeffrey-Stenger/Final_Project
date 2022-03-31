@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function Settings({ updateRounds, updateDuration }) {
+function Settings({ updateDuration, updateActivity }) {
     const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
     useEffect(() => {
@@ -17,18 +17,19 @@ function Settings({ updateRounds, updateDuration }) {
         console.log("submissionsuccess", submissionSuccess);
 
         const chosenActivity = event.target.activity.value;
+        updateActivity(chosenActivity);
         console.log("onFormSubmit", chosenActivity);
         //--------------------
-        const newRounds = event.target.rounds.value;
-        updateRounds(newRounds);
+        // const newRounds = event.target.rounds.value;
+        // updateRounds(newRounds);
 
         const newDuration = event.target.duration.value;
         updateDuration(newDuration);
 
-        const totalSessionTime = newRounds * newDuration;
-        console.log("total session time: ", totalSessionTime);
+        // const totalSessionTime = newRounds * newDuration;
+        // console.log("total session time: ", totalSessionTime);
 
-        console.log("NEW", newRounds, newDuration);
+        // console.log("NEW", newRounds, newDuration);
     }
 
     return (
@@ -36,10 +37,17 @@ function Settings({ updateRounds, updateDuration }) {
             <h1>SETTINGS</h1>
             <form className="settings-form" onSubmit={onSubmit}>
                 <div>
-                    <label for="duration">Length of Round(in minutes): </label>
-                    <input type="number" id="duration" min="1" max="59"></input>
+                    <label for="duration">
+                        Length of Work Session(in minutes):{" "}
+                    </label>
+                    <input
+                        type="number"
+                        id="duration"
+                        min="0.1"
+                        max="120"
+                    ></input>
                 </div>
-                <div>
+                {/* <div>
                     <label for="rounds">Number of rounds: </label>
                     <input
                         type="number"
@@ -47,8 +55,7 @@ function Settings({ updateRounds, updateDuration }) {
                         name="rounds"
                         min="1"
                     ></input>
-                    {/* <button onClick={updateRounds}>Update Rounds</button> */}
-                </div>
+                </div>  */}
                 <div className="select-activity-container">
                     <h2>What are you currently doing?</h2>
 

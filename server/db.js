@@ -12,15 +12,15 @@ const db = spicedPg(
 );
 //*********** DB FUNCTIONS ***********/
 
-function createWorkSession({ work_time }) {
+function createWorkSession({ work_time, activity }) {
     return db
         .query(
-            `INSERT INTO work_sessions (work_time) VALUES ($1)
+            `INSERT INTO work_sessions (work_time, activity) VALUES ($1, $2)
                  RETURNING *`,
-            [work_time]
+            [work_time, activity]
         )
         .then(({ rows }) => {
-            console.log("New work session:", rows[0]);
+            console.log("New work session created:", rows[0]);
             return rows[0];
         });
 }
@@ -51,7 +51,7 @@ function insertActivity({ activity, user_id }) {
 // function stopTime()
 
 // getUserById(1);
-insertActivity({ activity: "calculating", user_id: 102 });
-// createWorkSession({ work_time: 29 });
+// insertActivity({ activity: "calculating", user_id: 102 });
+createWorkSession({ work_time: 29, activity: "calculating" });
 
-module.exports = { insertActivity };
+module.exports = { insertActivity, createWorkSession };

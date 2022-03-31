@@ -12,8 +12,9 @@ import Modal from "./Modal";
 const logo = "doctor_logo.png";
 
 function App() {
-    const [rounds, setRounds] = useState(5);
+    // const [rounds, setRounds] = useState(5);
     const [roundDuration, setRoundDuration] = useState(0.1);
+    const [activity, setActivity] = useState("");
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
@@ -24,9 +25,8 @@ function App() {
             });
     }, []);
 
-    function parentRoundUpdater(numberOfRounds) {
-        console.log("PARENT ROUNDS", numberOfRounds);
-        setRounds(numberOfRounds);
+    function parentUpdateActivity(chosenActivity) {
+        setActivity(chosenActivity);
     }
 
     function parentUpdateDuration(newDuration) {
@@ -65,13 +65,20 @@ function App() {
             </header>
             <Route exact path="/">
                 <section className="main-page">
-                    {showModal && <Modal hideModal={hideModal} />}
+                    {showModal && (
+                        <Modal
+                            hideModal={hideModal}
+                            roundDuration={roundDuration}
+                            activity={activity}
+                        />
+                    )}
                     <Settings
-                        updateRounds={parentRoundUpdater}
+                        // updateRounds={parentRoundUpdater}
                         updateDuration={parentUpdateDuration}
+                        updateActivity={parentUpdateActivity}
                     />
                     <Timer
-                        rounds={rounds}
+                        // rounds={rounds}
                         roundDuration={roundDuration}
                         displayModal={() => {
                             console.log("toggle modal in timer triggered");

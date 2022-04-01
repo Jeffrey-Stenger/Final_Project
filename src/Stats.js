@@ -5,6 +5,13 @@ import { useState, useEffect } from "react";
 export default function Stats() {
     const [stats, setStats] = useState();
 
+    const someDate = new Date();
+    const numberOfDaysToSubtract = 7;
+    const date = someDate.setDate(someDate.getDate() - numberOfDaysToSubtract);
+    const defaultValue = new Date(date).toISOString().split("T")[0]; // yyyy-mm-dd
+
+    const today = new Date().toISOString().split("T")[0];
+
     function onSubmit(event) {
         event.preventDefault();
         const start_date = event.target.start.value;
@@ -13,17 +20,6 @@ export default function Stats() {
         fetch("/api/me/mystats/" + start_date + "/" + end_date)
             .then((response) => response.json())
             .then((data) => {
-                console.log("data retrieved", data);
-
-                // const workLengths = data.map((item) => {
-                //     return item.work_time;
-                // });
-
-                // const activities = data.map((item) => {
-                //     return item.activity;
-                // });
-                // console.log("workLengths", workLengths);
-                // console.log("activities", activities);
                 setStats([
                     {
                         values: data.map((each) => each.work_time),
@@ -59,10 +55,20 @@ export default function Stats() {
                         Select date range to view your work session statistics
                     </h3>
                     <label for="start">Start date:</label>
-                    <input type="date" id="start" name="start" />
+                    <input
+                        type="date"
+                        id="start"
+                        name="start"
+                        defaultValue={defaultValue}
+                    />
 
                     <label for="end">End date:</label>
-                    <input type="date" id="end" name="end" />
+                    <input
+                        type="date"
+                        id="end"
+                        name="end"
+                        defaultValue={today}
+                    />
                     <button type="submit">Submit</button>
                 </form>
             </div>

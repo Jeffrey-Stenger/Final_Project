@@ -1,20 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
 function Settings({ updateDuration, updateActivity }) {
-    const [submissionSuccess, setSubmissionSuccess] = useState(false);
-
-    useEffect(() => {
-        console.log("component rendered", submissionSuccess);
-    }, [submissionSuccess]);
+    // useEffect(() => {
+    //     console.log("component rendered", submissionSuccess);
+    // }, [submissionSuccess]);
 
     function onSubmit(event) {
         event.preventDefault();
         //--------------------
-        setSubmissionSuccess(true);
-        setTimeout(() => {
-            setSubmissionSuccess(false);
-        }, 3000);
-        console.log("submissionsuccess", submissionSuccess);
 
         const chosenActivity = event.target.activity.value;
         updateActivity(chosenActivity);
@@ -47,15 +40,7 @@ function Settings({ updateDuration, updateActivity }) {
                         max="120"
                     ></input>
                 </div>
-                {/* <div>
-                    <label for="rounds">Number of rounds: </label>
-                    <input
-                        type="number"
-                        id="rounds"
-                        name="rounds"
-                        min="1"
-                    ></input>
-                </div>  */}
+
                 <div className="select-activity-container">
                     <h2>What are you currently doing?</h2>
 
@@ -65,6 +50,7 @@ function Settings({ updateDuration, updateActivity }) {
                             id="studying"
                             name="activity"
                             value="studying"
+                            required
                         />
                         <label for="studying">Studying</label>
                     </div>
@@ -125,7 +111,6 @@ function Settings({ updateDuration, updateActivity }) {
                         <label for="team-meeting">Responding to emails</label>
                     </div>
                     <button type="submit">Submit</button>
-                    {submissionSuccess && <p>submitted!</p>}
                 </div>
             </form>
         </div>

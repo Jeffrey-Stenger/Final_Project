@@ -7,19 +7,26 @@ export default function Instructions() {
                 <p>
                     The timer will begin to countdown upon pressing the Start
                     button. Likewise, the countdown will pause when the Pause
-                    button is pressed The Cancel All button sets the current
-                    timer to 0.
+                    button is pressed The Reser Timer button sets the current
+                    timer back to the chosen duration.
                 </p>
             </div>
             <div>
                 <h2>Settings</h2>
-                <p>Setting are ...</p>
+                <p>
+                    Here select your desired work session duration and the
+                    corresponding activity.
+                </p>
+                <p>Both fields are required prior to starting the timer.</p>
             </div>
             <div>
-                <h2>Activity</h2>
+                <h2>Statistics</h2>
                 <p>
-                    You can enter your intended activity for the current work
-                    session and look it up later on in your Statistics journal.
+                    You can view the breakdown of your work session activities
+                    here.
+                    <br />
+                    By default the past week is shown, but you can choose a
+                    custom date range at the bottom.
                 </p>
             </div>
         </div>

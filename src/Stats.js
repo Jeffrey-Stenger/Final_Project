@@ -4,16 +4,32 @@ import { useState, useEffect } from "react";
 
 export default function Stats() {
     const [stats, setStats] = useState();
+    const [defaultChartRange, setDefaultChartRange] = useState(true);
 
     const someDate = new Date();
     const numberOfDaysToSubtract = 7;
     const date = someDate.setDate(someDate.getDate() - numberOfDaysToSubtract);
-    const defaultValue = new Date(date).toISOString().split("T")[0]; // yyyy-mm-dd
+    const weekAgo = new Date(date).toISOString().split("T")[0]; // yyyy-mm-dd
 
     const today = new Date().toISOString().split("T")[0];
 
+    useEffect(() => {
+        fetch("/api/me/mystats/" + weekAgo + "/" + today)
+            .then((response) => response.json())
+            .then((data) => {
+                setStats([
+                    {
+                        values: data.map((each) => each.work_time),
+                        labels: data.map((each) => each.activity),
+                        type: "pie",
+                    },
+                ]);
+            });
+    }, []);
+
     function onSubmit(event) {
         event.preventDefault();
+        setDefaultChartRange(false);
         const start_date = event.target.start.value;
         const end_date = event.target.end.value;
 
@@ -34,32 +50,61 @@ export default function Stats() {
 
     return (
         <div className="stats-wrapper">
-            <Plot
-                data={stats}
-                layout={{
-                    width: 600,
-                    height: 600,
-                    title: "My Work Session Breakdown",
-                    paper_bgcolor: "#202142",
-                    font: {
-                        family: "Tacoma",
-                        size: 24,
-                        color: "white",
-                        weight: "bold",
-                    },
-                }}
-            />
+            {!defaultChartRange ? (
+                <Plot
+                    data={stats}
+                    layout={{
+                        // autosize: true,
+                        automargin: true,
+                        width: 700,
+                        height: 600,
+                        title: "My Work Sessions Breakdown",
+                        paper_bgcolor: "#202142",
+                        font: {
+                            family: "Poppins",
+                            size: 18,
+                            color: "white",
+                            weight: "bold",
+                        },
+                        legend: {
+                            width: 100,
+                            x: 1,
+                        },
+                    }}
+                />
+            ) : (
+                <Plot
+                    data={stats}
+                    layout={{
+                        // autosize: true,
+
+                        automargin: true,
+                        width: 700,
+                        height: 600,
+                        title: "My Work Sessions for the Past Week",
+                        paper_bgcolor: "#202142",
+                        font: {
+                            family: "Poppins",
+                            size: 18,
+                            color: "white",
+                            weight: "bold",
+                        },
+                        legend: {
+                            width: 100,
+                            x: 1,
+                        },
+                    }}
+                />
+            )}
             <div className="stats-date-form">
                 <form onSubmit={onSubmit}>
-                    <h3>
-                        Select date range to view your work session statistics
-                    </h3>
+                    <h3>Or select a custom date range</h3>
                     <label for="start">Start date:</label>
                     <input
                         type="date"
                         id="start"
                         name="start"
-                        defaultValue={defaultValue}
+                        defaultValue={weekAgo}
                     />
 
                     <label for="end">End date:</label>

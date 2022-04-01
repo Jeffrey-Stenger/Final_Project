@@ -13,7 +13,7 @@ const logo = "doctor_logo.png";
 
 function App() {
     // const [rounds, setRounds] = useState(5);
-    const [roundDuration, setRoundDuration] = useState(0.1);
+    const [roundDuration, setRoundDuration] = useState(5);
     const [activity, setActivity] = useState("");
     const [showModal, setShowModal] = useState(false);
 
@@ -41,7 +41,7 @@ function App() {
 
     function hideModal(newDuration) {
         console.log("Parent hide modal reached");
-        setRoundDuration(5);
+        setRoundDuration(1);
         setShowModal(false);
     }
 
@@ -51,6 +51,9 @@ function App() {
                 <div className="left">
                     <NavLink to="/">
                         <img src={logo} className="logo" alt="" />
+                    </NavLink>
+                    <NavLink to="/" className="home-link">
+                        Home
                     </NavLink>
                 </div>
                 <h1>Dr Deep Work</h1>
@@ -76,6 +79,7 @@ function App() {
                         // updateRounds={parentRoundUpdater}
                         updateDuration={parentUpdateDuration}
                         updateActivity={parentUpdateActivity}
+                        className="left"
                     />
                     <Timer
                         // rounds={rounds}
@@ -84,7 +88,9 @@ function App() {
                             console.log("toggle modal in timer triggered");
                             displayModal();
                         }}
+                        className="center"
                     />
+                    <div className="right"></div>
 
                     {/* <SelectActivity /> */}
                 </section>

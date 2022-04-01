@@ -30,6 +30,7 @@ code {
 .logo {
     height: 4rem;
     width: 4rem;
+    margin-right: 1rem;
 }
 
 .nav-bar h1 {
@@ -48,14 +49,24 @@ code {
     color: #ffb49a;
 }
 
+.home-link {
+    color: #ffb49a;
+    top: 2.55rem;
+    position: absolute;
+}
 /* ********* Main Page ********* */
 .main-page {
     display: flex;
-    justify-content: center;
+    /* justify-content: center;
     align-content: center;
     align-items: center;
     flex-direction: row;
-    align-items: center;
+    align-items: center; */
+}
+
+.left,
+.right {
+    flex: 1;
 }
 
 /* ********* TIMER ********* */
@@ -67,8 +78,8 @@ code {
 
 .timer-container {
     border: 2px solid rgb(209, 20, 178);
-    width: 50rem;
-    height: 25rem;
+    width: 70rem;
+    height: 40rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -77,12 +88,12 @@ code {
 }
 
 .time-window {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .minutes {
     font-weight: bold;
-    font-size: 80px;
+    font-size: 120px;
 }
 
 .timer-button-wrapper {
@@ -93,12 +104,8 @@ code {
     font-weight: bold;
     font-size: 16px;
     margin-right: 1rem;
-    width: 6rem;
+    width: 8rem;
     border-radius: 5px;
-}
-
-.reset-timer-button {
-    width: 12rem;
 }
 
 .timer-button-wrapper button:hover {
@@ -121,19 +128,23 @@ code {
 
 /* ********* SETTINGS COMPONENT ********* */
 .settings-wrapper {
-    border: 2px solid rgb(209, 20, 178);
-    width: 30rem;
+    /* border: 2px solid rgb(209, 20, 178); */
+    width: 26rem;
+    height: 20rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    text-align: center;
-    border-radius: 15px;
-    margin: 1rem;
-    max-height: 400px;
+    align-content: center;
+    text-align: left;
+    /* border-radius: 15px; */
+    margin-top: 15rem;
+    /* max-height: 400px; */
+    font-size: 18px;
 }
 
 .settings-wrapper h1 {
     margin: auto;
+    text-decoration: underline;
 }
 
 .settings-wrapper button {
@@ -166,12 +177,12 @@ code {
 
 /* ********* SELECT ACTIVITY DIV ********* */
 .select-activity-container {
-    width: 30rem;
+    width: 26rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     margin-top: 0rem;
 }
 
@@ -267,4 +278,45 @@ code {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+
+.stats-date-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.stats-date-form input {
+    margin-right: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.stats-date-form button {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 1rem;
+    width: 6rem;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    /* margin-bottom: 0.5rem; */
+}
+
+.stats-date-form button:hover {
+    color: #fff;
+    background-color: #55828b;
+    border-color: #333;
+}
+
+.stats-date-form button:focus,
+.stats-date-form button:hover {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.stats-date-form button:active {
+    background-color: #55828b;
+    box-shadow: 0 3px #666;
+    transform: translateY(3px);
 }
